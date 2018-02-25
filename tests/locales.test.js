@@ -43,6 +43,20 @@ describe("bootbox locales", function() {
       return expect(this.labels.confirm).to.equal("تأكيد");
     });
   });
+  describe("Azerbaijani", function() {
+    beforeEach(function() {
+      return this.setLocale("az");
+    });
+    it("shows the correct OK translation", function() {
+      return expect(this.labels.ok).to.equal('OK');
+    });
+    it("shows the correct CANCEL translation", function() {
+      return expect(this.labels.cancel).to.equal('İmtina et');
+    });
+    return it("shows the correct CONFIRM translation", function() {
+      return expect(this.labels.confirm).to.equal('Təsdiq et');
+    });
+  });
   describe("English", function() {
     beforeEach(function() {
       return this.setLocale("en");
@@ -423,6 +437,20 @@ describe("bootbox locales", function() {
       return expect(this.labels.confirm).to.equal("تایید");
     });
   });
+   describe("Ukrainian", function() {
+        beforeEach(function() {
+            return this.setLocale("uk");
+        });
+        it("shows the correct OK translation", function() {
+            return expect(this.labels.ok).to.equal("OK");
+        });
+        it("shows the correct CANCEL translation", function() {
+            return expect(this.labels.cancel).to.equal("Відміна");
+        });
+        return it("shows the correct CONFIRM translation", function() {
+            return expect(this.labels.confirm).to.equal("Прийняти");
+        });
+    });
   return describe("Albanian", function() {
     beforeEach(function() {
       return this.setLocale("sq");
@@ -463,6 +491,20 @@ describe("bootbox locales", function() {
     });
     return it("shows the correct CONFIRM translation", function() {
       return expect(this.labels.confirm).to.equal("Potvrdiť");
+    });
+  });
+  return describe("Korean", function() {
+    beforeEach(function() {
+      return this.setLocale("ko");
+    });
+    it("shows the correct OK translation", function() {
+      return expect(this.labels.ok).to.equal("OK");
+    });
+    it("shows the correct CANCEL translation", function() {
+      return expect(this.labels.cancel).to.equal("취소");
+    });
+    return it("shows the correct CONFIRM translation", function() {
+      return expect(this.labels.confirm).to.equal("확인");
     });
   });
 });

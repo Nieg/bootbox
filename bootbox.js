@@ -841,6 +841,11 @@
       CANCEL  : "الغاء",
       CONFIRM : "تأكيد"
     },
+    az : {
+      OK      : "OK",
+      CANCEL  : "İmtina et",
+      CONFIRM : "Təsdiq et"
+    },
     bg_BG : {
       OK      : "Ок",
       CANCEL  : "Отказ",
@@ -936,6 +941,11 @@
       CANCEL  : "キャンセル",
       CONFIRM : "確認"
     },
+    ko : {
+      OK      : "OK",
+      CANCEL  : "취소",
+      CONFIRM : "확인"
+    },
     lt : {
       OK      : "Gerai",
       CANCEL  : "Atšaukti",
@@ -1000,6 +1010,11 @@
       OK      : "Tamam",
       CANCEL  : "İptal",
       CONFIRM : "Onayla"
+    },
+    uk : {
+      OK      : "OK",
+      CANCEL  : "Відміна",
+      CONFIRM : "Прийняти"
     },
     zh_CN : {
       OK      : "OK",
