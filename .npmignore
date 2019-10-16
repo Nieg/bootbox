@@ -3,6 +3,8 @@
 node_modules
 npm-debug.log
 .idea
-tests/reports
-tests/coverage
-build/size.csv
+.vscode/*
+.vs/*
+tests/*
+build/*
+dist/bootbox.zip

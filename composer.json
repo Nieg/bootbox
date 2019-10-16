@@ -15,7 +15,8 @@
   "extra": {
     "component": {
       "scripts": [
-        "bootbox.js"
+        "bootbox.js",
+        "bootbox.locales.js"
       ]
     }
   }
