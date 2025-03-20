@@ -72,6 +72,117 @@ describe('Bootbox', function() {
     });
   });
 
+  describe('onHide option', function() {
+    describe('hide.bs.modal', function() {
+      beforeEach(function() {
+        this.callback = sinon.spy();
+        this.dialog = bootbox.alert({ 
+          message: 'hi',
+          onHide: this.callback
+        });
+
+        this.e = function(target) {
+          $(this.dialog).trigger($.Event('hide.bs.modal', {
+            target: target
+          }));
+        };
+      });
+
+      describe('when triggered with the correct target', function() {
+        beforeEach(function() {
+          this.e(this.dialog.get(0));
+        });
+
+        it('has triggered onHide function', function() {
+          expect(this.callback).to.have.been.called;
+        });
+      });
+    });
+  });
+
+  describe('onHidden option', function() {
+    describe('hidden.bs.modal', function() {
+      beforeEach(function() {
+        this.callback = sinon.spy();
+        this.dialog = bootbox.alert({ 
+          message: 'hi',
+          onHidden: this.callback
+        });
+
+        this.e = function(target) {
+          $(this.dialog).trigger($.Event('hidden.bs.modal', {
+            target: target
+          }));
+        };
+      });
+
+      describe('when triggered with the correct target', function() {
+        beforeEach(function() {
+          this.e(this.dialog.get(0));
+        });
+
+        it('has triggered onHidden function', function() {
+          expect(this.callback).to.have.been.called;
+        });
+      });
+    });
+  });
+
+  describe('onShow option', function() {
+    describe('show.bs.modal', function() {
+      beforeEach(function() {
+        this.callback = sinon.spy();
+        this.dialog = bootbox.alert({ 
+          message: 'hi',
+          onShow: this.callback
+        });
+      });
+
+      describe('when triggered with the correct target', function() {
+        it('has triggered onShow function', function() {
+          expect(this.callback).to.have.been.called;
+        });
+      });
+    });
+  });
+
+  describe('relatedTarget option', function() {
+    describe('show.bs.modal', function() {
+      var options;
+
+      beforeEach(function() {
+        this.callback = sinon.spy();
+        options = {
+          message: 'hi',
+          onShow: this.callback
+        };
+      });
+
+      describe('when triggered with no related target', function() {
+        it('has passed no related target to the callback', function() {
+          bootbox.dialog(options);
+          expect(this.callback.args[0][0].relatedTarget).to.equal(null);
+        });
+      });
+
+      describe('when triggered with an invalid related target', function() {
+        it('has passed an invalid related target to the callback', function() {
+          options.relatedTarget = false;
+          bootbox.dialog(options);
+          expect(this.callback.args[0][0].relatedTarget).to.equal(false);
+        });
+      });
+
+      describe('when triggered with a valid related target', function() {
+        it('has passed the valid related target to the callback', function() {
+          options.relatedTarget = $('<button id="trigger"></button>').get(0);
+          bootbox.dialog(options);
+          expect(this.callback.args[0][0].relatedTarget.id).to.equal('trigger');
+        });
+      });
+    });
+  });
+
   describe('If $.fn.modal is undefined', function() {
     beforeEach(function() {
       this.oldModal = window.jQuery.fn.modal;
@@ -225,11 +336,7 @@ describe('Bootbox', function() {
           });
 
           it('invokes the callback', function() {
-            expect(this.callback).to.have.been.called;
-          });
-
-          it('should pass the dialog as "this"', function() {
-            expect(this.callback.thisValues[0]).to.equal(this.dialog);
+            expect(this.callback).not.to.have.been.called;
           });
         });
       });
@@ -268,6 +375,96 @@ describe('Bootbox', function() {
           it('should pass the dialog as "this"', function() {
             expect(this.callback.thisValues[0]).to.equal(this.dialog);
           });
+        });
+      });
+    });
+  });
+
+  describe('resuable: true dialog', function() {
+    describe('hidden.bs.modal', function() {
+      beforeEach(function() {
+        this.dialog = bootbox.alert({ message: 'hi', reusable: true });
+
+        this.removed = sinon.stub(this.dialog, 'remove');
+
+        this.e = function(target) {
+          $(this.dialog).trigger($.Event('hidden.bs.modal', {
+            target: target
+          }));
+        };
+      });
+
+      afterEach(function() {
+        this.removed.restore();
+      });
+
+      describe('when triggered with `reusable: true`', function() {
+        beforeEach(function() {
+          this.e({an: 'object'});
+        });
+
+        it('does not remove the dialog', function() {
+          expect(this.removed).not.to.have.been.called;
+        });
+      });
+    });
+  });
+
+  describe('resuable: false dialog', function() {
+    describe('hidden.bs.modal', function() {
+      beforeEach(function() {
+        this.dialog = bootbox.alert({ message: 'hi', reusable: false });
+
+        this.removed = sinon.stub(this.dialog, 'remove');
+
+        this.e = function(target) {
+          $(this.dialog).trigger($.Event('hidden.bs.modal', {
+            target: target
+          }));
+        };
+      });
+
+      afterEach(function() {
+        this.removed.restore();
+      });
+
+      describe('when triggered with `reusable: false`', function() {
+        beforeEach(function() {
+          this.e(this.dialog.get(0));
+        });
+
+        it('removes the dialog', function() {
+          expect(this.removed).to.have.been.called;
+        });
+      });
+    });
+  });
+
+  describe('resuable not set dialog', function() {
+    describe('hidden.bs.modal', function() {
+      beforeEach(function() {
+        this.dialog = bootbox.alert({ message: 'hi' });
+
+        this.removed = sinon.stub(this.dialog, 'remove');
+
+        this.e = function(target) {
+          $(this.dialog).trigger($.Event('hidden.bs.modal', {
+            target: target
+          }));
+        };
+      });
+
+      afterEach(function() {
+        this.removed.restore();
+      });
+
+      describe('when triggered with `reusable` not set', function() {
+        beforeEach(function() {
+          this.e(this.dialog.get(0));
+        });
+
+        it('removes the dialog', function() {
+          expect(this.removed).to.have.been.called;
         });
       });
     });

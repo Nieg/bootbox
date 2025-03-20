@@ -1,4 +1,42 @@
-## 5.3.2 (Latest Release)
+## 6.0.0 (Latest Release)
+
+- Removes various IE polyfills
+- Replaces `var` with `let`
+- JSDoc cleanup
+- Adds code to handle cases when click starts on the modal body and ends on the backdrop and `backdrop` is set to `true`
+- `bootbox.locale.js` and `bootbox.all.js` are now generated files and will be found in the `/dist` directory
+- Simplify locale file structure
+- Changed a few locale identifiers to match IANA specifications:
+  - `bg_BG` -> `bg-BG`
+  - `pt-br` -> `pt-BR`
+  - `zh_CN` -> `zh-CN`
+  - `zh_TW` -> `zh-CW`
+
+### 5.5.2
+
+- Adds Vietnamese locale
+
+### 5.5.0
+
+- Adds `reusable` option, which allows an instance of a Bootbox modal to be reused.
+
+### 5.4.1
+
+- Updates to how backdrop is handled. Fixes #766.
+
+### 5.4.0
+
+- Adds function hooks for `onShow`, `onShown`, `onHide`, and `onHidden` events, which map to their Bootstrap modal equivalents.
+
+### 5.3.4
+
+- Removes `':first'` selector from default button binding
+
+### 5.3.3
+
+- Fixes incorrect value validation for the `step` option when setting `inputType` to `number` for a prompt.
+
+### 5.3.2
 
 - Adds Georgian (ka) locale.
 

@@ -483,32 +483,7 @@
 
     return dialog;
   };
-  
-  exports.msg = function () {
-    var options;
-    options = mergeDialogOptions("msg", [], ["message", "callback", "time"], arguments);
-    if (options.callback && !$.isFunction(options.callback)) {
-      throw new Error("msg requires callback property to be a function when provided");
-    }
-    /**
-     * overrides
-     */
-    options = $.extend(true, {backdrop: true, keyboard: true}, options);
-    var dialog = exports.dialog(options);
-    dialog.on("shown.bs.modal", function () {
-      var $this = $(this);
-      setTimeout(function () {
-        $this.modal("hide");
-      }, options.time || 3000);
 
-    }).on("hidden.bs.modal", function () {
-      // var $this = $(this);
-      if (options.callback && $.isFunction(options.callback)) {
-        options.callback.call(options);
-      }
-    });
-    return dialog;
-  };  
 
   /**
    * Helper function to simulate the native alert() behavior. **NOTE**: This is non-blocking, so any code that must happen after the alert is dismissed should be placed within the callback function for this alert.
